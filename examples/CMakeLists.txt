@@ -1,0 +1,2 @@
+add_executable(basic_connect basic_connect.cpp)
+target_link_libraries(basic_connect PRIVATE orbis_engine)
