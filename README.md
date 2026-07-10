@@ -1,13 +1,18 @@
 # ORBIS Engine
 
-A modular, cross-platform VPN engine (library) for integration into desktop,
-mobile, server, and embedded applications. Not a standalone VPN app.
+A cross-platform VPN engine written in C++20.
 
-Status: **Phase 5.** WireGuard has real backends on Linux (netlink → kernel
-WireGuard) and Windows (WireGuardNT via `wireguard.dll`) — no custom crypto
-in either. macOS/Android are still placeholders. See
-[docs/PLATFORM_STATUS.md](docs/PLATFORM_STATUS.md) for exactly what works,
-what was actually verified, and how.
+ORBIS is a library for applications that need VPN functionality. It provides the core engine for managing VPN connections while using native platform implementations instead of implementing cryptography itself. It is **not** a standalone VPN client.
+
+## Current status
+
+Linux uses the kernel WireGuard implementation through Netlink.
+
+Windows uses WireGuardNT through `wireguard.dll`.
+
+macOS, Android, and iOS are not implemented yet.
+
+See `docs/PLATFORM_STATUS.md` for the current implementation status.
 
 ## Build
 
@@ -17,17 +22,31 @@ cmake --build build
 ctest --test-dir build
 ```
 
-## Try a real tunnel (Linux, root)
+## Example
+
+Build the example:
 
 ```bash
-# Edit examples/basic_connect.cpp with real keys from `wg genkey`/`wg pubkey`
 cmake --build build --target basic_connect
+```
+
+Generate a WireGuard key pair:
+
+```bash
+wg genkey
+wg pubkey
+```
+
+Edit `examples/basic_connect.cpp` with your configuration, then run:
+
+```bash
 sudo ./build/examples/basic_connect
 ```
 
-## Layout
+## Documentation
 
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+* `docs/ARCHITECTURE.md` — engine architecture
+* `docs/PLATFORM_STATUS.md` — platform support
 
 ## License
 
