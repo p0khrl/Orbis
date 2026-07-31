@@ -28,6 +28,7 @@ struct InterfaceConfig {
     std::vector<std::string> addresses;   // interface IPs, CIDR notation
     std::uint16_t listenPort = 0;         // 0 = OS-assigned
     std::optional<std::uint16_t> mtu;
+    std::optional<std::uint32_t> fwmark;  // firewall mark for policy routing; 0/unset = disabled
     std::vector<std::string> dns;
     std::vector<PeerConfig> peers;
 };
